@@ -1,4 +1,0 @@
-trackbox
-========
-
-Grails Training MakingDevs
