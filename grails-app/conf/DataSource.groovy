@@ -29,10 +29,11 @@ environments {
         dataSource {
             dbCreate = "update"
             //url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
-            url ="jdbc:mysql://192.168.0.34/trackbox"
+            url ="jdbc:mysql://127.0.0.1/trackbox"
             username="root"
-            password="root"
+            password="makingdevs"
             driverClassName="com.mysql.jdbc.Driver"
+	    dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"	
             properties {
                maxActive = -1
                minEvictableIdleTimeMillis=1800000
