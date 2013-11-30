@@ -83,6 +83,9 @@ grails.exceptionresolver.params.exclude = ['password']
 // configure auto-caching of queries by default (if false you can cache individual queries with 'cache: true')
 grails.hibernate.cache.queries = false
 
+//Directorio donde se pone los logs
+def logDirectory='target/'
+
 environments {
     development {
         grails.logging.jul.usebridge = true
@@ -90,26 +93,40 @@ environments {
     production {
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"
+        logDirectory='logs/'
     }
 }
 
-// log4j configuration
 log4j = {
-    // Example of changing the log pattern for the default console appender:
-    //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
-
-    error  'org.codehaus.groovy.grails.web.servlet',        // controllers
-           'org.codehaus.groovy.grails.web.pages',          // GSP
-           'org.codehaus.groovy.grails.web.sitemesh',       // layouts
-           'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-           'org.codehaus.groovy.grails.web.mapping',        // URL mapping
-           'org.codehaus.groovy.grails.commons',            // core / classloading
-           'org.codehaus.groovy.grails.plugins',            // plugins
-           'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
-           'org.springframework',
-           'org.hibernate',
-           'net.sf.ehcache.hibernate'
+ 
+  appenders {
+    //console name: 'stdout', layout: pattern(conversionPattern: '%d{ISO8601}\t%p\t%c:%L\t%m%n'), threshold: org.apache.log4j.Level.ERROR
+    appender new org.apache.log4j.DailyRollingFileAppender(name: 'file', file: logDirectory + "trackbox.log", datePattern: '\'_\'yyyy-MM-dd', layout: pattern(conversionPattern: '%d{ISO8601}\t%p\t%c:%L\t%m%n'))
+  }
+ 
+  root {
+    debug 'file'
+  }
+ 
+  debug 'grails.app.controllers.com.makingdevs',
+      'grails.app.taglib.com.makingdevs',
+      'grails.app.services.com.makingdevs',
+      'grails.app.domain.com.makingdevs',
+      'grails.app.conf'
+ 
+  error 'org.codehaus.groovy.grails.web.servlet',      
+        'org.codehaus.groovy.grails.web.pages',        
+        'org.codehaus.groovy.grails.web.sitemesh',     
+        'org.codehaus.groovy.grails.web.mapping.filter',
+        'org.codehaus.groovy.grails.web.mapping',      
+        'org.codehaus.groovy.grails.commons',          
+        'org.codehaus.groovy.grails.plugins',          
+        'org.codehaus.groovy.grails.orm.hibernate',    
+        'org.springframework',
+        'org.hibernate',
+        'net.sf.ehcache.hibernate',
+        'grails.plugin.cache',
+        'grails.util',
+        'org.apache',
+        'org.grails.plugin'
 }
