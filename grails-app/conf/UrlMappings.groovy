@@ -1,13 +1,19 @@
 class UrlMappings {
 
 	static mappings = {
-        "/$controller/$action?/$id?(.${format})?"{
+        "/admin/$controller/$action?/$id?(.${format})?"{
             constraints {
                 // apply constraints here
             }
         }
 
-        "/"(view:"/index")
+        name forProjectAlias : "/showUserStoriesForProject/$id"{
+        	controller="userStory"
+        	action="forProject"
+        }
+
+        "/"(controller:"home")
         "500"(view:'/error')
 	}
 }
+ 

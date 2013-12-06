@@ -128,5 +128,7 @@ log4j = {
         'grails.plugin.cache',
         'grails.util',
         'org.apache',
-        'org.grails.plugin'
+        'org.grails.plugin',
+        'org.codehaus',
+        'grails.app.taglib'
 }
